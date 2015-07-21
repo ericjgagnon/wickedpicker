@@ -9,7 +9,7 @@ ______________
 
 * [jQuery](http://jquery.com/download/) (>= 1.9)
 
- ## Usage
+## Usage
 
 In your HTML
  ```html
