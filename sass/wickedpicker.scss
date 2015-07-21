@@ -1,16 +1,15 @@
 
-@import 'compass';
-@import 'compass/reset';
+@import 'bourbon';
 
 $asphalt: #34495e;
 $blue: #3498db;
 
-.wicked-picker {
-  @include box-shadow(0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15));
+.wickedpicker {
+  box-shadow: 0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15);
   background: rgb(254, 254, 254);
   margin: 0 auto;
   border-radius: 0.1px;
-  width: 340px;
+  width: 270px;
   height: 130px;
   font-size: 14px;
   display: none;
@@ -18,6 +17,7 @@ $blue: #3498db;
     @include background-image(linear-gradient(top, #ffffff 0%, #f2f2f2 100%));
     @extend .text-center;
     background: #f2f2f2;
+    margin: 0 auto;
     border-bottom: 1px solid #e5e5e5;
     padding: 12px 11px 10px 15px;
     color: #4C4C4C;
@@ -25,6 +25,7 @@ $blue: #3498db;
   }
   &__controls {
     @extend .text-center;
+    margin: 0 auto;
     padding: 10px 0;
     height: 50px;
     width: 100%;

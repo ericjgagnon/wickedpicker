@@ -1,5 +1,8 @@
 /**
- * Created by ericgagnon on 6/15/15.
+ * wickedpicker v0.1 - A simple jQuery timepicker.
+ * Copyright (c) 2015 Eric Gagnon - http://github.com/wickedRidge/wickedpicker
+ * License: MIT
+ *
  */
 (function ($) {
 
@@ -16,24 +19,24 @@
         });
     };
 
-    var Timepicker = function (element, options) {
+    var Wickedpicker = function (element, options) {
 
 
         this.defaults = {
             now: new Date()
         };
         this.element = $(element);
-        this.element.addClass('hasTimepicker');
+        this.element.addClass('hasWickedpicker');
         this.element.attr('onkeypress', 'return false;');
-        this.createTimepicker();
+        this.createPicker();
         this.options = $.extend({}, this.defaults, options);
-        this.timepicker = $('.wicked-picker');
-        this.up = $('.wicked-picker__controls__control-up');
-        this.down = $('.wicked-picker__controls__control-down');
-        this.hoursElem = $('.wicked-picker__controls__control--hours');
-        this.minutesElem = $('.wicked-picker__controls__control--minutes');
-        this.meridiemElem = $('.wicked-picker__controls__control--meridiem');
-        this.canClick = ['hasTimepicker', this.timepicker.selector.substring(1), this.up.selector.substring(1), this.down.selector.substring(1), this.hoursElem.selector.substring(1), this.minutesElem.selector.substring(1), this.meridiemElem.selector.substring(1)];
+        this.timepicker = $('.wickedpicker');
+        this.up = $('.wickedpicker__controls__control-up');
+        this.down = $('.wickedpicker__controls__control-down');
+        this.hoursElem = $('.wickedpicker__controls__control--hours');
+        this.minutesElem = $('.wickedpicker__controls__control--minutes');
+        this.meridiemElem = $('.wickedpicker__controls__control--meridiem');
+        this.canClick = ['hasWickedpicker', this.timepicker.selector.substring(1), this.up.selector.substring(1), this.down.selector.substring(1), this.hoursElem.selector.substring(1), this.minutesElem.selector.substring(1), this.meridiemElem.selector.substring(1)];
         this.selectedHour = ((this.defaults.now.getHours() + 11) % 12) + 1;
         this.selectedMin = ((this.defaults.now.getMinutes() < 10) ? '0' : '') + this.defaults.now.getMinutes();
         this.selectedMeridiem = (this.defaults.now.getHours() > 12) ? 'PM' : 'AM';
@@ -42,10 +45,10 @@
         return this;
     };
 
-    $.extend(Timepicker.prototype = {
+    $.extend(Wickedpicker.prototype = {
 
 
-        showTimepicker: function (element) {
+        showPicker: function (element) {
             var timepickerPos = $(element.target).offset();
             this.setText(element);
             if (this.getText(element) !== this.getTime()) {
@@ -74,13 +77,13 @@
             }
         },
 
-        createTimepicker: function () {
-            if ($('.wicked-picker').length === 0)
-                $('body').append('<div class="wicked-picker"> <p class="wicked-picker__title">Timepicker</p> <ul class="wicked-picker__controls"> <li class="wicked-picker__controls__control"> <span class="wicked-picker__controls__control-up"></span><span class="wicked-picker__controls__control--hours">00</span><span class="wicked-picker__controls__control-down"></span> </li> <li class="wicked-picker__controls__control"> <span class="wicked-picker__controls__control-up"></span><span class="wicked-picker__controls__control--minutes">00</span><span class="wicked-picker__controls__control-down"></span> </li> <li class="wicked-picker__controls__control"> <span class="wicked-picker__controls__control-up"></span><span class="wicked-picker__controls__control--meridiem">AM</span><span class="wicked-picker__controls__control-down"></span> </li> </ul> </div>');
+        createPicker: function () {
+            if ($('.wickedpicker').length === 0)
+                $('body').append('<div class="wickedpicker"> <p class="wickedpicker__title">Timepicker</p> <ul class="wickedpicker__controls"> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--hours">00</span><span class="wickedpicker__controls__control-down"></span> </li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--minutes">00</span><span class="wickedpicker__controls__control-down"></span> </li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--meridiem">AM</span><span class="wickedpicker__controls__control-down"></span> </li> </ul> </div>');
         },
 
         attach: function (element) {
-            $(element).on('focus', $.proxy(this.showTimepicker, this));
+            $(element).on('focus', $.proxy(this.showPicker, this));
             $('html').on('click', $.proxy(this.hideTimepicker, this));
         },
 
@@ -166,9 +169,9 @@
 
     });
 
-    $.fn.timepicker = function (options) {
+    $.fn.wickedpicker = function (options) {
         return this.each(function () {
-            new Timepicker(this, options);
+            new Wickedpicker(this, options);
         });
     };
 

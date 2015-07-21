@@ -8,20 +8,20 @@ describe("Wickedpicker", function () {
     var currentTime = new Date();
 
     var hours = ((currentTime.getHours() + 11) % 12) + 1;
-    var hoursText = '.wicked-picker__controls__control--hours';
+    var hoursText = '.wickedpicker__controls__control--hours';
 
     var minutes = ((currentTime.getMinutes() < 10) ? '0' : '') + currentTime.getMinutes();
-    var minText = '.wicked-picker__controls__control--minutes';
+    var minText = '.wickedpicker__controls__control--minutes';
 
     var meridiem = (currentTime.getHours() > 12) ? 'PM' : 'AM';
-    var meridiemText = '.wicked-picker__controls__control--meridiem';
+    var meridiemText = '.wickedpicker__controls__control--meridiem';
 
-    var controlUp = '.wicked-picker__controls__control-up';
-    var controlDown = '.wicked-picker__controls__control-down';
+    var controlUp = '.wickedpicker__controls__control-up';
+    var controlDown = '.wickedpicker__controls__control-down';
 
     beforeEach(function () {
-        input = $('.wickedpicker').timepicker();
-        timepicker = $('.wicked-picker');
+        input = $('.timepicker').wickedpicker();
+        timepicker = $('.wickedpicker');
     });
 
     afterEach(function () {
@@ -32,8 +32,8 @@ describe("Wickedpicker", function () {
         expect(input).toBeDefined();
     });
 
-    it("Should have the class \"hasTimepicker\".", function () {
-        expect(input).toHaveClass('hasTimepicker');
+    it("Should have the class \"hasWickedpicker\".", function () {
+        expect(input).toHaveClass('hasWickedpicker');
     });
 
     it("Should have timepicker in DOM.", function () {
