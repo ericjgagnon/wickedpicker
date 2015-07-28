@@ -24,5 +24,23 @@ In your HTML
 
 In your JavaScript file
  ```javascript
- $('.timepicker').wickedpicker();
+     $('.timepicker').wickedpicker();
+ ```
+
+Optional twenty-four hour clock setting (default false)
+```javascript
+    $('.timepicker').wickedpicker({twentyFour: true});
+```
+
+Methods
+
+'time' get the current time inside of the input element that has a wickedpicker attached to it.
+```javascript
+    $('.timepicker').wickedpicker('time');
+```
+
+  If multiple input fields have the same class and instantiate a wickedpicker then pass the index of the timepicker
+  you'd like to select
+ ```javascript
+    $('.timepicker').wickedpicker('time', 0);
  ```
