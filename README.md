@@ -1,11 +1,8 @@
 # Wickedpicker
-______________
 
 ## wickedpicker.js - A simple jQuery timepicker
-______________
 
 ## Requirements
-______________
 
 * [jQuery](http://jquery.com/download/) (>= 1.9)
 
