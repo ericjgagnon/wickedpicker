@@ -1,0 +1,99 @@
+*, *:before, *:after {
+  box-sizing: border-box; }
+
+body, textarea, input, button, select, td {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 14px;
+  font-weight: lighter;
+  font-weight: 300; }
+
+a, p, button, select, option {
+  font-family: inherit;
+  font-weight: inherit; }
+
+object {
+  pointer-events: none;
+  height: inherit;
+  width: inherit; }
+
+h1, h2, h3, h4, h5, h6, th {
+  font-family: helvetica, arial, sans-serif;
+  font-weight: bolder;
+  font-weight: 400; }
+
+h1 {
+  font-size: 2em;
+  line-height: 1.25; }
+
+h2 {
+  font-size: 1.625em;
+  line-height: 1.15384615; }
+
+h3 {
+  font-size: 1.375em;
+  line-height: 1.13636364; }
+
+h4 {
+  font-size: 1.125em;
+  line-height: 1.11111111; }
+
+@media (min-width: 43.75em) {
+  main {
+    font-size: 1em;
+    line-height: 1.375; }
+  h1 {
+    font-size: 2.5em;
+    line-height: 1.125; }
+  h2 {
+    font-size: 2em;
+    line-height: 1.25; }
+  h3 {
+    font-size: 1.5em;
+    line-height: 1.25; }
+  h4 {
+    line-height: 1.22222222; } }
+
+@media (min-width: 56.25em) {
+  h1 {
+    font-size: 3em;
+    line-height: 1.05; }
+  h2 {
+    font-size: 2.25em;
+    line-height: 1.25; }
+  h3 {
+    font-size: 1.75em;
+    line-height: 1.25; } }
+
+.header {
+  color: #ffffff;
+  padding: 37px 15px;
+  background: #e74c3c url("../images/batthern.png") 0 0 repeat; }
+  .header__heading {
+    margin: 0 0;
+    font-size: 72px; }
+  .header__subheading {
+    display: block;
+    font-size: 20px; }
+    .header__subheading--small {
+      font-size: 16px; }
+  .header__github-repo {
+    position: absolute;
+    top: 33px;
+    right: 13%; }
+    .header__github-repo__link {
+      text-align: center;
+      height: 80px;
+      margin-bottom: 8px; }
+
+.hgroup {
+  max-width: 430px;
+  margin: 0 auto 0 18%; }
+
+.display-block, .header__github-repo__link {
+  display: block; }
+
+.text-right {
+  text-align: right; }
+
+.main {
+  max-width: 980px; }

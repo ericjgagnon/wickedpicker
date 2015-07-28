@@ -1,1 +1,75 @@
-My Wickedpicker Page
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Wickedpicker - By Eric Gagnon</title>
+        <link rel="stylesheet" href="stylesheets/normalize.css">
+        <link rel="stylesheet" href="stylesheets/master.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="hgroup">
+                <h1 class="header__heading">Wickedpicker</h1>
+                <span class="header__subheading text-right">
+                    A simple jQuery timepicker plugin
+                </span>
+            </div>
+            <div class="header__github-repo">
+                <a href="//github.com/wickedRidge/wickedpicker" class="header__github-repo__link">
+                    <object data="images/github_vector.svg" type="image/svg+xml">Your browser does not support SVG</object>
+                </a>
+                <span class="header__subheading--small">View my project on GitHub</span>
+            </div>
+        </header>
+        <main class="main">
+            <h2>Wickedpicker</h2>
+
+            <h3>wickedpicker.js - A simple jQuery timepicker</h3>
+
+            <h3>Requirements</h3>
+
+            * [jQuery](http://jquery.com/download/) (>= 1.9)
+
+            <h3>Usage</h3>
+
+            In your HTML
+            <pre>
+                <!--<body>-->
+                    <!--....-->
+                    <!--<input type="text" name="timepicker" class="timepicker"/>-->
+                    <!--....-->
+                    <!--<script type="text/javascript" src="jquery-1.11.3.min.js"></script>-->
+                    <!--<script type="text/javascript" src="wickedpicker.js"></script>-->
+                <!--</body>-->
+            </pre>
+
+
+            In your JavaScript file
+            <pre>
+            $('.timepicker').wickedpicker();
+            </pre>
+
+            Optional twenty-four hour clock setting (default false)
+            <pre>
+            $('.timepicker').wickedpicker({twentyFour: true});
+            </pre>
+
+            Methods
+
+            'time' get the current time inside of the input element that has a wickedpicker attached to it.
+            <pre>
+            $('.timepicker').wickedpicker('time');
+            </pre>
+
+            If multiple input fields have the same class and instantiate a wickedpicker then pass the index of the timepicker
+            you'd like to select
+            <pre>
+            $('.timepicker').wickedpicker('time', 0);
+            </pre>
+
+        </main>
+        <footer class="footer">
+            Copyright (c) 2015 Eric Gagnon Licensed under the MIT license.
+        </footer>
+    </body>
+</html>
