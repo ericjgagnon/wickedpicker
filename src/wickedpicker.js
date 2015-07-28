@@ -53,6 +53,7 @@
         showPicker: function (element) {
             var timepickerPos = $(element.target).offset();
             this.setText(element);
+            this.showHideMeridiemControl();
             if (this.getText(element) !== this.getTime()) {
                 var inputTime = this.getText(element).replace(':', '').split(' ');
                 var newTime = new Date();
@@ -81,12 +82,19 @@
 
         createPicker: function () {
             if ($('.wickedpicker').length === 0) {
-                $('body').append('<div class="wickedpicker"> <p class="wickedpicker__title">Timepicker</p> <ul class="wickedpicker__controls"> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--hours">00</span><span class="wickedpicker__controls__control-down"></span> </li><li class="wickedpicker__controls__control--separator">:</li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--minutes">00</span><span class="wickedpicker__controls__control-down"></span> </li> </ul> </div>');
-                if (this.options.twentyFour === false)
-                    $('.wickedpicker__controls').append('<li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--meridiem">AM</span><span class="wickedpicker__controls__control-down"></span> </li>');
+                $('body').append('<div class="wickedpicker"> <p class="wickedpicker__title">Timepicker</p> <ul class="wickedpicker__controls"> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--hours">00</span><span class="wickedpicker__controls__control-down"></span> </li><li class="wickedpicker__controls__control--separator">:</li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--minutes">00</span><span class="wickedpicker__controls__control-down"></span> </li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--meridiem">AM</span><span class="wickedpicker__controls__control-down"></span> </li> </ul> </div>');
             }
         },
+        //docket fix meridiem control
 
+        showHideMeridiemControl: function () {
+            if (this.options.twentyFour === false) {
+                $('.wickedpicker__controls__control--meridiem').parent().show();
+            }
+            else {
+                $('.wickedpicker__controls__control--meridiem').parent().hide();
+            }
+        },
         attach: function (element) {
             $(element).on('focus', $.proxy(this.showPicker, this));
             $('html').on('click', $.proxy(this.hideTimepicker, this));
@@ -205,7 +213,7 @@
                 }
             });
         }
-        else if($(this).hasClass('hasWickedpicker')){
+        else if ($(this).hasClass('hasWickedpicker')) {
             if (index !== undefined) {
                 return $.data($(this)[index], 'plugin_' + pluginName)['_' + options]();
             }
