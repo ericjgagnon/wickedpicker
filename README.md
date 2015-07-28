@@ -44,3 +44,8 @@ Methods
  ```javascript
     $('.timepicker').wickedpicker('time', 0);
  ```
+
+ ## License
+
+ Copyright (c) 2015 Eric Gagnon Licensed under the MIT license.
+
