@@ -25,12 +25,12 @@ $blue: #3498db;
   }
   &__controls {
     @extend .text-center;
-    margin: 0 auto;
     padding: 10px 0;
-    height: 50px;
-    width: 100%;
+    line-height: normal;
+    margin: 0;
     &__control {
       @extend .text-center;
+      vertical-align: middle;
       display: inline-block;
       font-size: inherit;
       margin: 0 auto;
@@ -58,8 +58,6 @@ $blue: #3498db;
       }
       &--separator {
         @extend .wickedpicker__controls__control;
-        position: relative;
-        top: -46%;
         width: 5px;
       }
     }

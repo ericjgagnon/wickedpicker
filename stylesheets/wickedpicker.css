@@ -17,11 +17,11 @@
     color: #4C4C4C;
     font-size: inherit; }
   .wickedpicker__controls {
-    margin: 0 auto;
     padding: 10px 0;
-    height: 50px;
-    width: 100%; }
+    line-height: normal;
+    margin: 0; }
     .wickedpicker__controls__control, .wickedpicker__controls__control--separator {
+      vertical-align: middle;
       display: inline-block;
       font-size: inherit;
       margin: 0 auto;
@@ -41,8 +41,6 @@
       .wickedpicker__controls__control-down:after {
         content: '\e801'; }
       .wickedpicker__controls__control--separator {
-        position: relative;
-        top: -46%;
         width: 5px; }
 
 .text-center, .wickedpicker__title, .wickedpicker__controls, .wickedpicker__controls__control, .wickedpicker__controls__control--separator, .wickedpicker__controls__control-up, .wickedpicker__controls__control-down {
