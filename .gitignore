@@ -1,1 +1,10 @@
-
+.sass-cache
+*.html
+jquery-1.11.3.min.js
+.idea
+sass
+jasmine
+spec
+config.rb
+node_modules
+gulpfile.js
