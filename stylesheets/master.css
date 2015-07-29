@@ -5,16 +5,30 @@ body, textarea, input, button, select, td {
   font-family: helvetica, arial, sans-serif;
   font-size: 14px;
   font-weight: lighter;
-  font-weight: 300; }
+  font-weight: 300;
+  color: #333333; }
 
 a, p, button, select, option {
   font-family: inherit;
   font-weight: inherit; }
 
+a {
+  text-decoration: none;
+  color: inherit; }
+
 object {
   pointer-events: none;
   height: inherit;
   width: inherit; }
+
+.code-block {
+  padding: 25px 15px;
+  background-color: #ffffff;
+  border: 2px solid #f2f2f2;
+  max-width: 700px;
+  margin: 15px auto 15px 0;
+  font-family: monospace, monospace;
+  font-size: 1em; }
 
 h1, h2, h3, h4, h5, h6, th {
   font-family: helvetica, arial, sans-serif;
@@ -79,21 +93,66 @@ h4 {
   .header__github-repo {
     position: absolute;
     top: 33px;
-    right: 13%; }
-    .header__github-repo__link {
-      text-align: center;
-      height: 80px;
-      margin-bottom: 8px; }
+    right: 13%;
+    text-align: center;
+    height: 80px;
+    margin-bottom: 8px; }
 
 .hgroup {
   max-width: 430px;
   margin: 0 auto 0 18%; }
 
-.display-block, .header__github-repo__link {
+.main {
+  background: linear-gradient(#fafafa, #f9f9f9);
+  padding-top: 25px; }
+
+.content {
+  max-width: 980px;
+  margin: 0 auto; }
+  .content__subsection {
+    margin-bottom: 15px; }
+    .content__subsection__heading {
+      margin: 0 0; }
+    .content__subsection__subheading {
+      font-size: 18px;
+      margin-left: 5px; }
+
+.footer {
+  padding: 30px 0;
+  background-color: #212327;
+  color: #ffffff;
+  font-size: 14px; }
+
+.display-block {
   display: block; }
+
+.text-center {
+  text-align: center; }
 
 .text-right {
   text-align: right; }
 
-.main {
-  max-width: 980px; }
+.indent {
+  margin-left: 25px; }
+
+.transition, .underline:after {
+  -webkit-transition: all, 0.3s;
+  -moz-transition: all, 0.3s;
+  transition: all, 0.3s; }
+
+.underline {
+  position: relative;
+  color: #3498db; }
+
+.underline:after {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: #3498db;
+  content: ""; }
+
+.underline:hover:after {
+  width: 100%; }

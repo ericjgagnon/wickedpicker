@@ -16,6 +16,7 @@ body, textarea, input, button, select, td  {
   font-size: 14px;
   font-weight: lighter;
   font-weight: 300;
+  color: #333333;
 }
 
 
@@ -24,10 +25,25 @@ a, p, button, select, option {
   font-weight: inherit;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 object {
   pointer-events: none;
   height: inherit;
   width: inherit;
+}
+
+.code-block {
+  padding: 25px 15px;
+  background-color: #ffffff;
+  border: 2px solid #f2f2f2;
+  max-width: 700px;
+  margin: 15px auto 15px 0;
+  font-family: monospace, monospace;
+  font-size: 1em;
 }
 
 h1, h2, h3, h4, h5, h6, th {
@@ -97,12 +113,9 @@ h4 { font-size: 1.125em;  line-height: 1.11111111;}
     position: absolute;
     top:  33px;
     right: 13%;
-    &__link {
-      @extend .display-block;
-      text-align: center;
-      height: 80px;
-      margin-bottom: 8px;
-    }
+    text-align: center;
+    height: 80px;
+    margin-bottom: 8px;
   }
 }
 
@@ -111,14 +124,70 @@ h4 { font-size: 1.125em;  line-height: 1.11111111;}
   margin: 0 auto 0 18%;
 }
 
+.main {
+  background: linear-gradient(#fafafa, #f9f9f9);
+  padding-top: 25px;
+}
+
+.content {
+  max-width: 980px;
+  margin: 0 auto;
+  &__subsection {
+    margin-bottom: 15px;
+    &__heading {
+      margin: 0 0;
+    }
+    &__subheading {
+      font-size: 18px;
+      margin-left: 5px;
+    }
+  }
+}
+
+.footer {
+  padding: 30px 0;
+  background-color: #212327;
+  color: #ffffff;
+  font-size: 14px;
+}
+
 .display-block {
   display: block;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .text-right {
   text-align: right;
 }
 
-.main {
-  max-width: 980px;
+.indent {
+  margin-left: 25px;
+}
+
+.transition {
+  @include transition(all, 0.3s);
+}
+
+.underline {
+  position: relative;
+  color: $blue;
+}
+
+.underline:after {
+  @extend .transition;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color: $blue;
+  content: "";
+}
+
+.underline:hover:after {
+  width: 100%;
 }
