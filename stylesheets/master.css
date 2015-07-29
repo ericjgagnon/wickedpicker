@@ -38,7 +38,8 @@ object {
     width: auto;
     padding: 7px 5px; }
   .code-block__code {
-    display: inline-block; }
+    display: inline-block;
+    word-break: break-all; }
 
 .code-block-in-paragraph {
   line-height: 28px; }
@@ -105,15 +106,14 @@ h4 {
     display: block;
     font-size: 20px; }
     .header__subheading--small {
-      font-size: 16px;
-      display: none; }
+      font-size: 14px; }
       @media screen and (min-width: 768px) {
         .header__subheading--small {
-          display: block; } }
+          font-size: 16px; } }
   .header__github-repo {
     position: absolute;
-    top: 20px;
-    right: 12%;
+    top: 10px;
+    right: 5%;
     text-align: center;
     height: 45px;
     margin-bottom: 8px; }
@@ -136,11 +136,14 @@ h4 {
   .main__inner {
     max-width: 980px;
     margin: 0 auto;
-    padding: 20px; }
+    padding: 10px; }
     .main__inner::after {
       clear: both;
       content: "";
       display: table; }
+    @media screen and (min-width: 768px) {
+      .main__inner {
+        padding: 20px; } }
 
 .side {
   float: none;
@@ -180,12 +183,12 @@ h4 {
 
 .content {
   margin: 0 auto;
-  float: none;
-  padding: 15px; }
+  float: none; }
   @media screen and (min-width: 992px) {
     .content {
       width: 680px;
-      float: right; } }
+      float: right;
+      padding: 15px; } }
   .content__page-heading {
     margin: 0 0; }
   .content__page-subheading {
@@ -242,6 +245,12 @@ h4 {
 
 .indent {
   margin-left: 25px; }
+
+.hidden {
+  display: none; }
+  @media screen and (min-width: 768px) {
+    .hidden {
+      display: initial; } }
 
 .transition, .side__link:hover, .underline:after {
   -webkit-transition: all, 0.3s;
