@@ -123,7 +123,7 @@
         },
 
         parseHours: function (hours) {
-            return (this.options.twentyFour === false) ? ((hours + 11) % 12) + 1 : hours;
+            return (this.options.twentyFour === false) ? ((hours + 11) % 12) + 1 : (hours < 10) ? '0' + hours : hours;
         },
 
         setMinutes: function (minutes) {
