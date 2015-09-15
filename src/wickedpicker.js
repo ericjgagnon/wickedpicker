@@ -94,7 +94,7 @@
             }
         },
         attach: function (element) {
-            $(element).on('focus', $.proxy(this.showPicker, this));
+            $(element).on('click', $.proxy(this.showPicker, this));
             $('html').on('click', $.proxy(this.hideTimepicker, this));
         },
 
