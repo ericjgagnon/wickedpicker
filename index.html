@@ -5,7 +5,6 @@
         <title>Wickedpicker - By Eric Gagnon</title>
         <link rel="icon" type="image/png" href="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="wickedpicker/wickedpicker.min.css">
         <link rel="stylesheet" href="stylesheets/normalize.css">
         <link rel="stylesheet" href="stylesheets/master.css">
 
@@ -54,7 +53,7 @@
                         <span class="content__page-subheading">Turn any input element into a elegant timepicker</span>
                     </div>
 
-                    <span class="underline smooth-scroll" data-target="examples">Jump to examples</span>
+                    <span class="underline smooth-scroll" data-target="demo">Jump to demo</span>
 
                     <div class="content__subsection">
                         <h3 class="content__subsection__heading">Features</h3>
@@ -64,6 +63,7 @@
                             <li>Lightweight</li>
                             <li>Easy to implement</li>
                             <li>All instances on the page use the same timepicker selector, no duplication</li>
+                            <li>Supports click and click & hold for quick time selecting</li>
                         </ul>
                     </div>
 
@@ -145,8 +145,8 @@
                         </div>
                     </div>
 
-                    <div class="content__subsection" id="examples">
-                        <h3 class="content__subsection__heading">Examples</h3>
+                    <div class="content__subsection" id="demo">
+                        <h3 class="content__subsection__heading">Demo</h3>
 
                         <div class="content__subsection picker-container">
                             <h4>Twelve hour clock:</h4>
@@ -161,7 +161,7 @@
 
                     <div class="content__subsection">
                         <h3 class="content__subsection__heading">License</h3>
-                        <p class="copyright">Copyright &copy; 2015 Eric Gagnon Licensed under the MIT license.</p>
+                        <p class="copyright">Copyright &copy; 2015 Eric Gagnon licensed under the MIT license.</p>
                     </div>
                 </section>
             </div>
@@ -171,6 +171,7 @@
         </footer>
         <script type="text/javascript" src="javascript/jquery-1.11.3.min.js"></script>
         <script type="text/javascript" src="javascript/smooth_scroll.js"></script>
+        <link rel="stylesheet" href="wickedpicker/wickedpicker.min.css">
         <script type="text/javascript" src="wickedpicker/wickedpicker.min.js"></script>
         <script type="text/javascript">
             var twelveHour = $('.timepicker-12-hr').wickedpicker();
