@@ -5,6 +5,7 @@ $asphalt: #34495e;
 $blue: #3498db;
 
 .wickedpicker {
+  @include user-select(none);
   box-shadow: 0 0 0 1px rgba(14,41,57,0.12),0 2px 5px rgba(14,41,57,0.44),inset 0 -1px 2px rgba(14,41,57,0.15);
   background: rgb(254, 254, 254);
   margin: 0 auto;
@@ -16,12 +17,25 @@ $blue: #3498db;
   &__title {
     @include background-image(linear-gradient(top, #ffffff 0%, #f2f2f2 100%));
     @extend .text-center;
+    position: relative;
     background: #f2f2f2;
     margin: 0 auto;
     border-bottom: 1px solid #e5e5e5;
     padding: 12px 11px 10px 15px;
     color: #4C4C4C;
     font-size: inherit;
+  }
+  &__close {
+    @include transform(translateY(-25%));
+    position: absolute;
+    top: 25%;
+    right: 5px;
+    color: $asphalt;
+    cursor: pointer;
+    &:before {
+      @extend .fontello;
+      content: '\e802';
+    }
   }
   &__controls {
     @extend .text-center;
@@ -44,9 +58,6 @@ $blue: #3498db;
         margin: 3px auto;
         font-size: 18px;
         cursor: pointer;
-        &:hover {
-          color: $blue;
-        }
       }
       &-up:before {
         @extend .fontello;
@@ -66,6 +77,10 @@ $blue: #3498db;
 
 .text-center {
   text-align: center;
+}
+
+.hover-state {
+  color: $blue;
 }
 
 @font-face {

@@ -23,6 +23,7 @@ v8flags(function (err, results) {
 
 ## Release History
 
+* 2015-07-28 - v2.0.10 - don't throw for electron runtime, just call back with empty array
 * 2015-06-25 - v2.0.9 - call back with flags even if cache file can't be written
 * 2015-06-15 - v2.0.7 - revert to 2.0.5 behavior.
 * 2015-06-15 - v2.0.6 - store cache file in ~/.cache or ~/AppData/Local depending on platform

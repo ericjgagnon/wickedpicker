@@ -46,68 +46,60 @@ describe("Wickedpicker", function () {
         expect(timepicker).toBeHidden();
     });
 
-    it("Can be focused on.", function () {
-        var spyEvent = spyOnEvent(input.selector, 'focus');
-        input.focus();
-        expect('focus').toHaveBeenTriggeredOn(input.selector);
-        expect(spyEvent).toHaveBeenTriggered();
-
-    });
-
-    it("Should show timepicker on focus.", function () {
-        input.focus();
+    it("Should show timepicker on click.", function () {
+        input.click();
         expect(timepicker).toBeVisible();
     });
 
     it("Should show current time in input field for initial focus.", function () {
-        input.focus();
+        input.click();
         var value = input.val();
         expect(value).toBe(now);
     });
 
-    it("Should show current time on timepicker for initial focus.", function () {
-        input.focus();
+    it("Should show current time on timepicker for initial click.", function () {
+        input.click();
         var value = $(hoursText).text() + ' : ' + $(minText).text() + ' ' + $(meridiemText).text();
         expect(value).toBe(now);
     });
 
     it("Should increase hours value when hours control up is clicked", function () {
-        input.focus();
+        input.click();
         var hoursUp = $(hoursText).siblings(controlUp);
         hoursUp.click();
         expect(input.val().split(':')[0].trim()).toBe($(hoursText).text());
     });
 
     it("Should increase hours value when hours control down is clicked", function () {
-        input.focus();
+        input.click();
         var down = $(hoursText).siblings(controlDown);
         down.click();
         expect(input.val().split(':')[0].trim()).toBe($(hoursText).text());
     });
 
     it("Should increase minutes value when minutes control up is clicked", function () {
-        input.focus();
+        input.click();
         var minutesUp = $(minText).siblings(controlUp);
         minutesUp.click();
         expect(input.val().split(' ')[2].trim()).toBe($(minText).text());
     });
 
     it("Should increase minutes value when minutes control down is clicked", function () {
-        input.focus();
+        input.click();
         var down = $(minText).siblings(controlDown);
         down.click();
         expect(input.val().split(' ')[2].trim()).toBe($(minText).text());
     });
 
     it("Should increase meridiem value when meridiem control up is clicked", function () {
-        input.focus();
+        input.click();
         var meridiemUp = $(meridiemText).siblings(controlUp);
         meridiemUp.click();
         expect(input.val().split(' ')[3].trim()).toBe($(meridiemText).text());
     });
 
     it("Should increase meridiem value when meridiem control down is clicked", function () {
-        input.focus();
+        input.click();
         var down = $(meridiemText).siblings(controlDown);
         down.click();
         expect(input.val().split(' ')[3].trim()).toBe($(meridiemText).text());
@@ -115,7 +107,7 @@ describe("Wickedpicker", function () {
 
     it("Should not respond on key press.", function() {
         var spyEvent = spyOnEvent(input.selector, 'keypress');
-        input.focus();
+        input.click();
         input.keypress();
         expect('keypress').toHaveBeenTriggeredOn(input.selector);
         expect(spyEvent).toHaveBeenTriggered();

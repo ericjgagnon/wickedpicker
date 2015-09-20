@@ -15,7 +15,11 @@ exports.prepare = function (extensions, filepath, cwd, nothrow) {
   }
   var config = normalize(extensions[ext]);
   if (!config) {
-    throw new Error('No module loader found for "'+ext+'".');
+    if (nothrow) {
+      return;
+    } else {
+      throw new Error('No module loader found for "'+ext+'".');
+    }
   }
   if (!cwd) {
     cwd = path.dirname(path.resolve(filepath));

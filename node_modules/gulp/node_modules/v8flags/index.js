@@ -85,6 +85,14 @@ function writeConfig (fd, flags, cb) {
 }
 
 module.exports = function (cb) {
+  // bail early if this is not node
+  var isElectron = process.versions && process.versions.electron;
+  if (isElectron) {
+    return process.nextTick(function () {
+      cb(null, []);
+    });
+  }
+
   // attempt to open/read cache file
   openConfig(function (openErr, result) {
     if (!openErr && typeof result !== 'number') {
