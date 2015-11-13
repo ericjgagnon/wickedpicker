@@ -43,7 +43,7 @@ Methods
  ```
 
  For more checkout
- [Wickedpicker gh-pages](http://wickedridge.github.io/wickedpicker/)
+ [Wickedpicker gh-pages](http://ericjgagnon.github.io/wickedpicker/)
 
 ## License
 
