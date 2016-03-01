@@ -5,6 +5,5 @@ jquery-1.11.3.min.js
 sass
 jasmine
 spec
-config.rb
 node_modules
 gulpfile.js
