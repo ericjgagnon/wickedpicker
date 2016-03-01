@@ -7,3 +7,4 @@ jasmine
 spec
 node_modules
 gulpfile.js
+package.json

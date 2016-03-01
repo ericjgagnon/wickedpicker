@@ -42,6 +42,9 @@ Methods
     $('.timepicker').wickedpicker('time', 0);
  ```
 
+ For more checkout
+ [Wickedpicker gh-pages](http://ericjgagnon.github.io/wickedpicker/)
+
 ## License
 
  Copyright (c) 2015 Eric Gagnon Licensed under the MIT license.
