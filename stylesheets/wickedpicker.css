@@ -29,11 +29,11 @@
     transform: translateY(-25%);
     position: absolute;
     top: 25%;
-    right: 5px;
+    right: 10px;
     color: #34495e;
     cursor: pointer; }
     .wickedpicker__close:before {
-      content: '\e802'; }
+      content: '\00d7'; }
   .wickedpicker__controls {
     padding: 10px 0;
     line-height: normal;
@@ -72,7 +72,7 @@
   font-weight: normal;
   font-style: normal; }
 
-.fontello:before, .wickedpicker__close:before, .wickedpicker__controls__control-up:before, .fontello-after:after, .wickedpicker__controls__control-down:after {
+.fontello:before, .wickedpicker__controls__control-up:before, .fontello-after:after, .wickedpicker__controls__control-down:after {
   font-family: 'fontello';
   font-style: normal;
   font-weight: normal;

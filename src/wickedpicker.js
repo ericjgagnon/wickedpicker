@@ -30,10 +30,17 @@
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
 
+    var today = new Date();
+
     var pluginName = "wickedpicker",
         defaults = {
-            now: new Date(),
-            twentyFour: false
+            now: today.getHours() + ':'  + today.getMinutes(),
+            twentyFour: false,
+            upArrow: 'wickedpicker__controls__control-up',
+            downArrow: 'wickedpicker__controls__control-down',
+            close: 'wickedpicker__close',
+            hoverState: 'hover-state',
+            title: 'Timepicker'
         };
 
     /*
@@ -46,14 +53,21 @@
 
         this.element.addClass('hasWickedpicker');
         this.element.attr('onkeypress', 'return false;');
+        this.element.attr('aria-showingpicker', 'false');
         this.createPicker();
         this.timepicker = $('.wickedpicker');
-        this.up = $('.wickedpicker__controls__control-up');
-        this.down = $('.wickedpicker__controls__control-down');
+        this.up = $('.' + this.options.upArrow);
+        this.down = $('.' + this.options.downArrow);
+        this.separator = $('.wickedpicker__controls__control--separator');
         this.hoursElem = $('.wickedpicker__controls__control--hours');
         this.minutesElem = $('.wickedpicker__controls__control--minutes');
         this.meridiemElem = $('.wickedpicker__controls__control--meridiem');
-        this.close = $('.wickedpicker__close');
+        this.close = $('.' + this.options.close);
+
+        //Create a new Date object based on the default or passing in now value
+        var time = this.options.now.replace(':', ' ').split(' ');
+        this.options.now = new Date(today.getFullYear(), today.getMonth(), today.getDate(), time[0], time[1]);
+
         this.selectedHour = this.parseHours(this.options.now.getHours());
         this.selectedMin = this.parseMinutes(this.options.now.getMinutes());
         this.selectedMeridiem = this.parseMeridiem(this.options.now.getHours());
@@ -70,6 +84,7 @@
          */
         showPicker: function (element) {
             var timepickerPos = $(element.target).offset();
+            $(element.target).attr({'aria-showingpicker': 'true', 'tabindex': -1});
             this.setText(element);
             this.showHideMeridiemControl();
             if (this.getText(element) !== this.getTime()) {
@@ -97,6 +112,17 @@
          */
         hideTimepicker: function (element) {
             this.timepicker.hide();
+            var pickerHidden = {
+                start: function() {
+                    var setShowPickerFalse = $.Deferred();
+                    $('[aria-showingpicker="true"]').attr('aria-showingpicker', 'false');
+                    return setShowPickerFalse.promise();
+                }
+            };
+            function setTabIndex(index) {
+                setTimeout(function(){$('[aria-showingpicker="false"]').attr('tabindex', index);},400);
+            }
+            pickerHidden.start().then(setTabIndex(0));
         },
 
         /*
@@ -104,7 +130,8 @@
          */
         createPicker: function () {
             if ($('.wickedpicker').length === 0) {
-                $('body').append('<div class="wickedpicker"> <p class="wickedpicker__title">Timepicker <span class="wickedpicker__close"></span> </p> <ul class="wickedpicker__controls"> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--hours">00</span><span class="wickedpicker__controls__control-down"></span> </li><li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--minutes">00</span><span class="wickedpicker__controls__control-down"></span> </li> <li class="wickedpicker__controls__control"> <span class="wickedpicker__controls__control-up"></span><span class="wickedpicker__controls__control--meridiem">AM</span><span class="wickedpicker__controls__control-down"></span> </li> </ul> </div>');
+                $('body').append('<div class="wickedpicker"> <p class="wickedpicker__title">' + this.options.title + '<span class="wickedpicker__close"></span> </p> <ul class="wickedpicker__controls"><li class="wickedpicker__controls__control"> <span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--hours" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span></li><li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li> <li class="wickedpicker__controls__control"> <span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--minutes" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span> </li> <li class="wickedpicker__controls__control"> <span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--meridiem" tabindex="-1">AM</span><span class="' + this.options.downArrow + '"></span> </li> </ul> </div>');
+                this.attachKeyboardEvents();
             }
         },
 
@@ -122,10 +149,57 @@
 
         /*
          * Bind the click events to the input
+         *
+         * @param {object} The input element
          */
         attach: function (element) {
-            $(element).on('click', $.proxy(this.showPicker, this));
-            $(this.close).on('click', $.proxy(this.hideTimepicker, this));
+            $(element).attr('tabindex', 0);
+            $(element).on('click focus', $.proxy(this.showPicker, this));
+            $(this.close).off('click').on('click', $.proxy(this.hideTimepicker, this));
+            var tabindex = 0;
+            $(element).on('focus', function () {
+                $('.wickedpicker__controls__control--hours').focus();
+            });
+        },
+
+        /**
+         * Added keyboard functionality to improve usability
+         */
+        attachKeyboardEvents: function () {
+            $(document).on('keydown', $.proxy(function (event) {
+                switch (event.keyCode) {
+                    case 9:
+                        if (event.target.className !== 'hasWickedpicker') {
+                            $(this.close).trigger('click');
+                        }
+                        break;
+                    case 27:
+                        $(this.close).trigger('click');
+                        break;
+                    case 37: //Left arrow
+                        if (event.target.className !== this.hoursElem[0].className) {
+                            $(event.target).parent().prevAll('li').not(this.separator.selector).first().children()[1].focus();
+                        } else {
+                            $(event.target).parent().siblings(':last').children()[1].focus();
+                        }
+                        break;
+                    case 39: //Right arrow
+                        if (event.target.className !== this.meridiemElem[0].className) {
+                            $(event.target).parent().nextAll('li').not(this.separator.selector).first().children()[1].focus();
+                        } else {
+                            $(event.target).parent().siblings(':first').children()[1].focus();
+                        }
+                        break;
+                    case 38: //Up arrow
+                        $(':focus').prev().trigger('click');
+                        break;
+                    case 40: //Down arrow
+                        $(':focus').next().trigger('click');
+                        break;
+                    default:
+                        break;
+                }
+            }, this));
         },
 
         /*
@@ -262,7 +336,7 @@
          *
          * @param {object} The input element
          */
-        handleTimeAdjustments: function(element) {
+        handleTimeAdjustments: function (element) {
             var timeOut = 0;
             //Click and click and hold timepicker incrementer and decrementer
             $(this.up).add(this.down).off('mousedown click touchstart').on('mousedown click', {
@@ -344,9 +418,10 @@
         },
 
         setHoverState: function () {
+            var self = this;
             if (!isMobile()) {
                 $(this.up).add(this.down).add(this.close).hover(function () {
-                    $(this).toggleClass('hover-state');
+                    $(this).toggleClass(self.options.hoverState);
                 });
             }
         },

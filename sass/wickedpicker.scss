@@ -29,12 +29,11 @@ $blue: #3498db;
     @include transform(translateY(-25%));
     position: absolute;
     top: 25%;
-    right: 5px;
+    right: 10px;
     color: $asphalt;
     cursor: pointer;
     &:before {
-      @extend .fontello;
-      content: '\e802';
+      content: '\00d7';
     }
   }
   &__controls {

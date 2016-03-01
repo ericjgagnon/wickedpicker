@@ -16,13 +16,14 @@
         <script type="text/javascript" src="src/wickedpicker.js"></script>
         <!--<script type="text/javascript" src="spec/wickedpickerSpec.js"></script>-->
     </head>
-    <body>
-        <label for="timepicker">Time input:</label>
+    <body style="background-color: #2B879E;">
+        <!--<label for="timepicker" style="color:#ffffff;">Time input:</label>-->
         <input type="text" id="timepicker" name="timepicker" class="timepicker">
-        <!--<label for="timepicker-two">Time input 2:</label>-->
-        <!--<input type="text" id="timepicker-two" name="timepicker-two" class="timepicker-two">-->
+        <!--<label for="timepicker-two" style="color:#ffffff;">Time input 2:</label>-->
+        <!--<input type="text" id="timepicker-two" name="timepicker-two" class="timepicker-24">-->
         <script type="text/javascript">
-            $('.timepicker').wickedpicker({twentyFour: false});
+            $('.timepicker').wickedpicker({now: '11:25', twentyFour: false, title: 'My Timepicker'});
+        //    $('.timepicker-24').wickedpicker({twentyFour: true});
         </script>
     </body>
 </html>

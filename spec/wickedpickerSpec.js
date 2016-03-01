@@ -70,7 +70,7 @@ describe("Wickedpicker", function () {
         expect(input.val().split(':')[0].trim()).toBe($(hoursText).text());
     });
 
-    it("Should increase hours value when hours control down is clicked", function () {
+    it("Should decrease hours value when hours control down is clicked", function () {
         input.click();
         var down = $(hoursText).siblings(controlDown);
         down.click();
@@ -84,36 +84,24 @@ describe("Wickedpicker", function () {
         expect(input.val().split(' ')[2].trim()).toBe($(minText).text());
     });
 
-    it("Should increase minutes value when minutes control down is clicked", function () {
+    it("Should decrease minutes value when minutes control down is clicked", function () {
         input.click();
         var down = $(minText).siblings(controlDown);
         down.click();
         expect(input.val().split(' ')[2].trim()).toBe($(minText).text());
     });
 
-    it("Should increase meridiem value when meridiem control up is clicked", function () {
+    it("Should switch the meridiem value when meridiem control up is clicked", function () {
         input.click();
         var meridiemUp = $(meridiemText).siblings(controlUp);
         meridiemUp.click();
         expect(input.val().split(' ')[3].trim()).toBe($(meridiemText).text());
     });
 
-    it("Should increase meridiem value when meridiem control down is clicked", function () {
+    it("Should switch the meridiem value when meridiem control down is clicked", function () {
         input.click();
         var down = $(meridiemText).siblings(controlDown);
         down.click();
         expect(input.val().split(' ')[3].trim()).toBe($(meridiemText).text());
     });
-
-    it("Should not respond on key press.", function() {
-        var spyEvent = spyOnEvent(input.selector, 'keypress');
-        input.click();
-        input.keypress();
-        expect('keypress').toHaveBeenTriggeredOn(input.selector);
-        expect(spyEvent).toHaveBeenTriggered();
-        var value = input.val();
-        expect(value).toEqual(now);
-        expect(value).not.toBe(null);
-    });
-
 });
