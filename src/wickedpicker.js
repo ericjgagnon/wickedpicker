@@ -155,8 +155,17 @@
         attach: function (element) {
             $(element).attr('tabindex', 0);
             $(element).on('click focus', $.proxy(this.showPicker, this));
-            $(this.close).off('click').on('click', $.proxy(this.hideTimepicker, this));
-            var tabindex = 0;
+            //Handle click events for closing Wickedpicker
+            $(document).off('click').on('click', $.proxy(function(event) {
+                //Clicking the X
+                if($(event.target).is(this.close)) {
+                    this.hideTimepicker(element);
+                } else if($(event.target).closest(this.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the  Wickedpicker or one of it's inputs
+                    event.stopPropagation();
+                } else {   //Everything else
+                    this.hideTimepicker(element);
+                }
+            }, this));
             $(element).on('focus', function () {
                 $('.wickedpicker__controls__control--hours').focus();
             });
