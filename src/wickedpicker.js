@@ -1,6 +1,6 @@
 /**
- * wickedpicker v0.1.0 - A simple jQuery timepicker.
- * Copyright (c) 2015 Eric Gagnon - http://github.com/wickedRidge/wickedpicker
+ * wickedpicker v0.2.0 - A simple jQuery timepicker.
+ * Copyright (c) 2015-2016 Eric Gagnon - http://github.com/wickedRidge/wickedpicker
  * License: MIT
  */
 
