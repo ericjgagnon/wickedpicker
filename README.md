@@ -8,7 +8,7 @@
 
 ## Usage
 
-In your HTML
+#### In your HTML
  ```html
  <body>
  ....
@@ -19,17 +19,26 @@ In your HTML
  </body>
  ```
 
-In your JavaScript file
+#### In your JavaScript file
  ```javascript
      $('.timepicker').wickedpicker();
  ```
 
-Optional twenty-four hour clock setting (default false)
+#### Options
 ```javascript
-    $('.timepicker').wickedpicker({twentyFour: true});
+    var options = {
+        now: "12:35", //hh:mm 24 hour format only, defaults to current time
+        twentyFour: false,  //Display 24 hour format, defaults to false
+        upArrow: 'wickedpicker__controls__control-up',  //The up arrow class selector to use, for custom CSS
+        downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS
+        close: 'wickedpicker__close', //The close class selector to use, for custom CSS
+        hoverState: 'hover-state', //The hover state class to use, for custom CSS
+        title: 'Timepicker' //The Wickedpicker's title
+    };
+    $('.timepicker').wickedpicker(options);
 ```
 
-Methods
+#### Methods
 
 'time' get the current time inside of the input element that has a wickedpicker attached to it.
 ```javascript
@@ -42,10 +51,16 @@ Methods
     $('.timepicker').wickedpicker('time', 0);
  ```
 
- For more checkout
- [Wickedpicker gh-pages](http://ericjgagnon.github.io/wickedpicker/)
+#### Functionality
+    The Wickedpicker opens when the bound input is clicked, or focused on (try tabbing), and it can be closed by either
+    clicking the X, by clicking outside of it, or by pressing esc. The arrows icons increase or decrease their
+    associated time values or toggle the meridiem.  The values can also be changed using the up and down keys when
+    focused on. To move to the next value just press the left or right arrow key.
+
+For more checkout
+[Wickedpicker gh-pages](http://ericjgagnon.github.io/wickedpicker/)
 
 ## License
 
- Copyright (c) 2015 Eric Gagnon Licensed under the MIT license.
+ Copyright (c) 2015-2016 Eric Gagnon Licensed under the MIT license.
 
