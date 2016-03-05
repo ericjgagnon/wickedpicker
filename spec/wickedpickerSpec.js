@@ -18,6 +18,7 @@ describe("Wickedpicker", function () {
 
     var controlUp = '.wickedpicker__controls__control-up';
     var controlDown = '.wickedpicker__controls__control-down';
+    var close = '.wickedpicker__close';
 
     var now = hours + ' : ' + minutes + ' ' + meridiem;
 
@@ -61,6 +62,18 @@ describe("Wickedpicker", function () {
         input.click();
         var value = $(hoursText).text() + ' : ' + $(minText).text() + ' ' + $(meridiemText).text();
         expect(value).toBe(now);
+    });
+
+    it("Should close the timepicker when the X is clicked", function() {
+       input.click();
+        $(close).click();
+        expect(timepicker).toBeHidden();
+    });
+
+    it("Should close the timepicker when anything other than the timepicker is clicked", function() {
+        input.click();
+        $('html').click();
+        expect(timepicker).toBeHidden();
     });
 
     it("Should increase hours value when hours control up is clicked", function () {
