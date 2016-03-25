@@ -18,6 +18,9 @@ var files = {
   'k.l.scss': path.join(fixtures, 'components/k.l.scss'),
   'm.scss': path.join(fixtures, 'm.scss'),
   '_n.scss': path.join(fixtures, 'compass/_n.scss'),
+  '_p.scss': path.join(fixtures, '_o.scss/_p.scss'),
+  'r.scss': path.join(fixtures, 'r.scss'),
+  '_s.scss': path.join(fixtures, 'components/_q.scss/_s.scss'),
   '_compass.scss': path.join(fixtures, 'components/_compass.scss')
 }
 
@@ -51,6 +54,10 @@ describe('sass-graph', function(){
 
     it('should ignore custom imports for m.scss', function() {
       assert.deepEqual([files['_compass.scss'] , files['_n.scss']], graph.index[files['m.scss']].imports);
+    });
+
+    it('should ignore folder "_q.scss" which has allowed extensions (but not it’s children), referenced from r.scss', function() {
+      assert.deepEqual([files['_compass.scss'], files['_s.scss']], graph.index[files['r.scss']].imports);
     });
 
     it('should traverse ancestors of _c.scss', function() {

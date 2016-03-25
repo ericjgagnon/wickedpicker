@@ -1,9 +1,7 @@
 [![Bourbon](http://images.thoughtbot.com/bourbon/bourbon-logo.svg)](http://bourbon.io)
 
-[![Gem Version](http://img.shields.io/gem/v/bourbon.svg?style=flat)](https://rubygems.org/gems/bourbon)
-[![Code Climate](http://img.shields.io/codeclimate/github/thoughtbot/bourbon.svg?style=flat)](https://codeclimate.com/github/thoughtbot/bourbon)
-[![Gitter chat](https://img.shields.io/badge/gitter-thoughtbot/bourbon-ae3dd2.svg?style=flat)](https://gitter.im/thoughtbot/bourbon)
-[![Stack Overflow](http://img.shields.io/badge/stack%20overflow-bourbon-ae3dd2.svg?style=flat)](http://stackoverflow.com/questions/tagged/bourbon)
+[![GitHub release](https://img.shields.io/github/release/thoughtbot/bourbon.svg)](https://github.com/thoughtbot/bourbon/releases)
+[![CircleCI branch](https://img.shields.io/circleci/project/thoughtbot/bourbon/master.svg)](https://circleci.com/gh/thoughtbot/bourbon/tree/master)
 
 ## A simple and lightweight mixin library for Sass.
 
@@ -74,7 +72,7 @@ For command line help, visit our wiki page on Bourbon’s [command line interfac
   mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
   ```
 
-4. Delete _all_ Sprockets directives in `application.scss` (`require`, `require_tree` and `require_self`) and use Sass’s native `@import` instead.
+4. Delete _all_ Sprockets directives in `application.scss` (`require`, `require_tree` and `require_self`) and use Sass’s native `@import` instead. ([why?](http://pivotallabs.com/structure-your-sass-files-with-import))
 
 5. Import Bourbon at the beginning of `application.scss`. All additional stylesheets should be imported below Bourbon:
 
@@ -85,6 +83,22 @@ For command line help, visit our wiki page on Bourbon’s [command line interfac
   ```
 
   [Help! I’m getting an undefined mixin error.](https://github.com/thoughtbot/bourbon/wiki/Rails-Help-%5C-Undefined-mixin)
+
+## Installing with npm and using a Node-based asset pipeline
+
+1. Add Bourbon as a dependency:
+
+  ```bash
+  npm install --save bourbon
+  ```
+
+2. If you’re using [Eyeglass](http://eyeglass.rocks), skip to Step 3. Otherwise, you’ll need to add Bourbon to your node-sass `includePaths` option. `require("bourbon").includePaths` is an array of directories that you should pass to node-sass. How you do this depends on how node-sass is integrated into your project.
+
+3. Import Bourbon into your Sass files:
+
+  ```scss
+  @import "bourbon";
+  ```
 
 ## Installing older versions of Bourbon
 
@@ -127,7 +141,7 @@ and may be redistributed under the terms specified in the [license](LICENSE.md).
 
 ## About thoughtbot
 
-[![thoughtbot](http://thoughtbot.github.io/images/signature.svg)][hire]
+[<img src="http://thoughtbot.github.io/images/signature.svg" width="250" alt="thoughtbot logo">][hire]
 
 Bourbon is maintained and funded by thoughtbot, inc.
 The names and logos for thoughtbot are trademarks of thoughtbot, inc.

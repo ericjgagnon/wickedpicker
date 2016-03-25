@@ -178,7 +178,6 @@
             $(element).attr('tabindex', 0);
             $(element).on('click focus', function(event) {
                 self.showPicker($(this));
-                console.log(event);
             });
             //Handle click events for closing Wickedpicker
             $(document).off('click').on('click', function(event) {
