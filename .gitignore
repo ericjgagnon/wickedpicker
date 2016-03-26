@@ -6,5 +6,6 @@ sass
 jasmine
 spec
 node_modules
+node_module/*
 gulpfile.js
 package.json
