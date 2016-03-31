@@ -1,10 +1,10 @@
 /**
- * wickedpicker v0.2.0 - A simple jQuery timepicker.
+ * wickedpicker v0.3.0 - A simple jQuery timepicker.
  * Copyright (c) 2015-2016 Eric Gagnon - http://github.com/wickedRidge/wickedpicker
  * License: MIT
  */
 
-(function ($, window, document, undefined) {
+(function ($, window, document) {
 
     "use strict";
 
@@ -34,7 +34,7 @@
 
     var pluginName = "wickedpicker",
         defaults = {
-            now: today.getHours() + ':'  + today.getMinutes(),
+            now: today.getHours() + ':' + today.getMinutes(),
             twentyFour: false,
             upArrow: 'wickedpicker__controls__control-up',
             downArrow: 'wickedpicker__controls__control-down',
@@ -67,8 +67,7 @@
         this.close = $('.' + this.options.close);
 
         //Create a new Date object based on the default or passing in now value
-        var time = this.options.now.split(':');
-        time[2] = (time.length < 3) ? today.getSeconds() : time[2];
+        var time = this.timeArrayFromString(this.options.now);
         this.options.now = new Date(today.getFullYear(), today.getMonth(), today.getDate(), time[0], time[1], time[2]);
         this.selectedHour = this.parseHours(this.options.now.getHours());
         this.selectedMin = this.parseSecMin(this.options.now.getMinutes());
@@ -90,17 +89,16 @@
             $(element).attr({'aria-showingpicker': 'true', 'tabindex': -1});
             this.setText(element);
             this.showHideMeridiemControl();
-            this.showHideSecondsControl();
             if (this.getText(element) !== this.getTime()) {
                 var inputTime = this.getText(element).replace(/:/g, '').split(' ');
-                var newTime = new Date();
-                newTime.setHours(inputTime[0]);
-                newTime.setMinutes(inputTime[2]);
-                if(this.options.showSeconds) {
-                    newTime.setSeconds(inputTime[4]);
-                    this.setMeridiem(inputTime[6]);
+                var newTime = {};
+                newTime.hours = inputTime[0];
+                newTime.minutes = inputTime[2];
+                if (this.options.showSeconds) {
+                    newTime.seconds = inputTime[4];
+                    newTime.meridiem = inputTime[5];
                 } else {
-                    this.setMeridiem(inputTime[3]);
+                    newTime.meridiem = inputTime[3];
                 }
                 this.setTime(newTime);
             }
@@ -108,7 +106,7 @@
                 'z-index': this.element.css('z-index') + 1,
                 position: 'absolute',
                 left: timepickerPos.left,
-                top: timepickerPos.top + element.offsetHeight + 5
+                top: timepickerPos.top + element[0].offsetHeight
             }).show();
 
             this.handleTimeAdjustments(element);
@@ -122,15 +120,19 @@
         hideTimepicker: function (element) {
             this.timepicker.hide();
             var pickerHidden = {
-                start: function() {
+                start: function () {
                     var setShowPickerFalse = $.Deferred();
                     $('[aria-showingpicker="true"]').attr('aria-showingpicker', 'false');
                     return setShowPickerFalse.promise();
                 }
             };
+
             function setTabIndex(index) {
-                setTimeout(function(){$('[aria-showingpicker="false"]').attr('tabindex', index);},400);
+                setTimeout(function () {
+                    $('[aria-showingpicker="false"]').attr('tabindex', index);
+                }, 400);
             }
+
             pickerHidden.start().then(setTabIndex(0));
         },
 
@@ -139,7 +141,12 @@
          */
         createPicker: function () {
             if ($('.wickedpicker').length === 0) {
-                $('body').append('<div class="wickedpicker"> <p class="wickedpicker__title">' + this.options.title + '<span class="wickedpicker__close"></span> </p> <ul class="wickedpicker__controls"><li class="wickedpicker__controls__control"> <span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--hours" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span></li><li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li> <li class="wickedpicker__controls__control"> <span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--minutes" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span> </li><li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li><li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--seconds" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span> </li><li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--meridiem" tabindex="-1">AM</span><span class="' + this.options.downArrow + '"></span> </li> </ul> </div>');
+                var picker = '<div class="wickedpicker"><p class="wickedpicker__title">' + this.options.title + '<span class="wickedpicker__close"></span></p><ul class="wickedpicker__controls"><li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--hours" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span></li><li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li><li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--minutes" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span></li>';
+                if (this.options.showSeconds) {
+                    picker += '<li class="wickedpicker__controls__control--separator"><span class="wickedpicker__controls__control--separator-inner">:</span></li><li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--seconds" tabindex="-1">00</span><span class="' + this.options.downArrow + '"></span> </li>';
+                }
+                picker += '<li class="wickedpicker__controls__control"><span class="' + this.options.upArrow + '"></span><span class="wickedpicker__controls__control--meridiem" tabindex="-1">AM</span><span class="' + this.options.downArrow + '"></span></li></ul></div>';
+                $('body').append(picker);
                 this.attachKeyboardEvents();
             }
         },
@@ -176,15 +183,15 @@
         attach: function (element) {
             var self = this;
             $(element).attr('tabindex', 0);
-            $(element).on('click focus', function(event) {
+            $(element).on('click focus', function (event) {
                 self.showPicker($(this));
             });
             //Handle click events for closing Wickedpicker
-            $(document).off('click').on('click', function(event) {
+            $(document).off('click').on('click', function (event) {
                 //Clicking the X
-                if($(event.target).is(self.close)) {
+                if ($(event.target).is(self.close)) {
                     self.hideTimepicker(element);
-                } else if($(event.target).closest(self.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the  Wickedpicker or one of it's inputs
+                } else if ($(event.target).closest(self.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the  Wickedpicker or one of it's inputs
                     event.stopPropagation();
                 } else {   //Everything else
                     self.hideTimepicker(element);
@@ -238,13 +245,15 @@
         /*
          * Set the time on the timepicker
          *
-         * @param {Date} The date being set
+         * @param {object} The date being set
          */
         setTime: function (time) {
-            this.setHours(time.getHours());
-            this.setMinutes(time.getMinutes());
-            this.setMeridiem();
-            this.setSeconds(time.getSeconds());
+            this.setHours(time.hours);
+            this.setMinutes(time.minutes);
+            this.setMeridiem(time.meridiem);
+            if (this.options.showSeconds) {
+                this.setSeconds(time.seconds);
+            }
         },
 
         /*
@@ -439,6 +448,7 @@
             this.setText(input);
         },
 
+
         /*
          * Sets the give input's text to the current timepicker's time
          *
@@ -469,7 +479,7 @@
          * @return {string}
          */
         formatTime: function (hour, min, meridiem, seconds) {
-            var formattedTime = hour  + ' : ' + min ;
+            var formattedTime = hour + ' : ' + min;
             if (this.options.twentyFour) {
                 formattedTime = hour + ' : ' + min;
             }
@@ -482,6 +492,9 @@
             return formattedTime;
         },
 
+        /**
+         *  Apply the hover class to the arrows and close icon fonts
+         */
         setHoverState: function () {
             var self = this;
             if (!isMobile()) {
@@ -489,6 +502,24 @@
                     $(this).toggleClass(self.options.hoverState);
                 });
             }
+        },
+
+        /**
+         * Convert the options time string format
+         * to an array
+         *
+         * returns => [hours, minutes, seconds]
+         *
+         * @param stringTime
+         * @returns {*}
+         */
+        timeArrayFromString: function (stringTime) {
+            if (stringTime.length) {
+                var time = stringTime.split(':');
+                time[2] = (time.length < 3) ? '00' : time[2];
+                return time;
+            }
+            return false;
         },
 
         //public functions
