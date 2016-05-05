@@ -186,8 +186,9 @@
             $(element).on('click focus', function (event) {
                 self.showPicker($(this));
             });
+            
             //Handle click events for closing Wickedpicker
-            $(document).off('click').on('click', function (event) {
+            var clickHandler = function (event) {
                 //Clicking the X
                 if ($(event.target).is(self.close)) {
                     self.hideTimepicker(element);
@@ -196,7 +197,9 @@
                 } else {   //Everything else
                     self.hideTimepicker(element);
                 }
-            });
+            };
+            $(document).off('click', clickHandler).on('click', clickHandler);
+            
             $(element).on('focus', function () {
                 $('.wickedpicker__controls__control--hours').focus();
             });
