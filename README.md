@@ -33,7 +33,10 @@
         downArrow: 'wickedpicker__controls__control-down', //The down arrow class selector to use, for custom CSS
         close: 'wickedpicker__close', //The close class selector to use, for custom CSS
         hoverState: 'hover-state', //The hover state class to use, for custom CSS
-        title: 'Timepicker' //The Wickedpicker's title
+        title: 'Timepicker', //The Wickedpicker's title,
+        showSeconds: false, //Whether or not to show seconds,
+        secondsInterval: 1, //Change interval for seconds, defaults to 1,
+        minutesInterval: 1 //Change interval for minutes, defaults to 1
     };
     $('.timepicker').wickedpicker(options);
 ```
