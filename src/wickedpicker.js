@@ -41,7 +41,9 @@
             close: 'wickedpicker__close',
             hoverState: 'hover-state',
             title: 'Timepicker',
-            showSeconds: false
+            showSeconds: false,
+            secondsInterval: 1,
+            minutesInterval: 1
         };
 
     /*
@@ -443,9 +445,9 @@
             if (targetClass.endsWith('hours')) {
                 this.setHours(eval(this.getHours() + operator + 1));
             } else if (targetClass.endsWith('minutes')) {
-                this.setMinutes(eval(this.getMinutes() + operator + 1));
+                this.setMinutes(eval(this.getMinutes() + operator + this.options.minutesInterval));
             } else if (targetClass.endsWith('seconds')) {
-                this.setSeconds(eval(this.getSeconds() + operator + 1));
+                this.setSeconds(eval(this.getSeconds() + operator + this.options.secondsInterval));
             } else {
                 this.setMeridiem();
             }
