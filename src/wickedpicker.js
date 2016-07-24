@@ -75,6 +75,7 @@
         this.selectedMeridiem = this.parseMeridiem(this.options.now.getHours());
         this.setHoverState();
         this.attach(element);
+        this.setText(element);
     }
 
     $.extend(Wickedpicker.prototype, {
