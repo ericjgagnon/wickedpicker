@@ -88,3 +88,24 @@
   margin-left: .2em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
+
+.clearable-picker {
+  position: relative;
+  display: inline-block; }
+  .clearable-picker > .hasWickedpicker {
+    padding-right: 1em; }
+  .clearable-picker > .hasWickedpicker::-ms-clear {
+    display: none; }
+  .clearable-picker > [data-clear-picker] {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    font-weight: bold;
+    font-size: 0.8em;
+    padding: 0 0.3em 0.2em;
+    line-height: 1;
+    color: #bababa;
+    cursor: pointer; }
+    .clearable-picker > [data-clear-picker]:hover {
+      color: #a1a1a1; }
