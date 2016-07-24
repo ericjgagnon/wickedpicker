@@ -11,18 +11,41 @@
         <!--<script type="text/javascript" src="jasmine/lib/jasmine-2.3.4/jasmine-html.js"></script>-->
         <!--<script type="text/javascript" src="jasmine/lib/jasmine-2.3.4/boot.js"></script>-->
         <!--<script type="text/javascript" src="jasmine/lib/jasmine-2.3.4/jasmine-jquery.js"></script>-->
-
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="stylesheets/wickedpicker.css">
-        <script type="text/javascript" src="src/wickedpicker.js"></script>
         <!--<script type="text/javascript" src="spec/wickedpickerSpec.js"></script>-->
     </head>
     <body style="background-color: #2B879E;">
-        <!--<label for="timepicker" style="color:#ffffff;">Time input:</label>-->
-        <input type="text" id="timepicker" name="timepicker" class="timepicker">
-        <!--<label for="timepicker-two" style="color:#ffffff;">Time input 2:</label>-->
-        <!--<input type="text" id="timepicker-two" name="timepicker-two" class="timepicker">-->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Tab 1</a>
+            </li>
+            <li role="presentation">
+                <a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Tab 2</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="tab1">
+                <input type="text" id="timepicker" name="timepicker" class="timepicker" style="position: absolute; top: 274.8px; left: 729px;">
+                <input type="text" id="timepicker-two" name="timepicker-two" class="timepicker">
+                <button id="some-btn">Click me</button>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="tab2"></div>
+        </div>
+        <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="src/wickedpicker.js"></script>
         <script type="text/javascript">
-            $('.timepicker').wickedpicker({now: '10:22', twentyFour: false, title: 'My Timepicker', showSeconds: true});
+            function pickerShow(input, timepicker) {
+                console.log(input);
+                console.log(timepicker);
+            }
+            $('.timepicker').wickedpicker({now: '10:22', twentyFour: true, title: 'My Timepicker', showSeconds:
+                    false, show: pickerShow});
+            $('#some-btn').on('click', function (event) {
+               console.log('click');
+            });
         //    $('.timepicker-24').wickedpicker({twentyFour: true});
         </script>
     </body>
