@@ -1,5 +1,5 @@
 /**
- * wickedpicker v0.3.0 - A simple jQuery timepicker.
+ * wickedpicker v0.4.0 - A simple jQuery timepicker.
  * Copyright (c) 2015-2016 Eric Gagnon - http://github.com/wickedRidge/wickedpicker
  * License: MIT
  */
@@ -45,7 +45,8 @@
             secondsInterval: 1,
             minutesInterval: 1,
             beforeShow: null,
-            show: null
+            show: null,
+            clearable: false
         };
 
     /*
@@ -199,6 +200,11 @@
          */
         attach: function (element) {
             var self = this;
+
+            if (this.options.clearable) {
+                self.makePickerInputClearable(element);
+            }
+
             $(element).attr('tabindex', 0);
             $(element).on('click focus', function (event) {
                 //Prevent multiple firings
@@ -525,6 +531,22 @@
                     $(this).toggleClass(self.options.hoverState);
                 });
             }
+        },
+
+        /**
+         * Wrapping the given input field with the clearable container
+         * , add a span that will contain the x, and bind the clear
+         * input event to the span
+         *
+         * @param input
+         */
+        makePickerInputClearable: function(input) {
+            $(input).wrap('<div class="clearable-picker"></div>').after('<span data-clear-picker>&times;</span>');
+
+            //When the x is clicked, clear its sibling input field
+            $('[data-clear-picker]').on('click', function(event) {
+               $(this).siblings('.hasWickedpicker').val('');
+            });
         },
 
         /**

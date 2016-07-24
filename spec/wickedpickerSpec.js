@@ -117,4 +117,11 @@ describe("Wickedpicker", function () {
         down.click();
         expect(input.val().split(' ')[3].trim()).toBe($(meridiemText).text());
     });
+
+    it("Should clear the input when its x is clicked", function() {
+        input = $('.timepicker').wickedpicker({clearable: true});
+        var clear = $('[data-clear-picker]');
+        clear.click();
+        expect(input.val()).toBe('');
+    });
 });
