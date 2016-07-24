@@ -6,8 +6,9 @@ var log = require('fancy-log');
 var applySourceMap = require('vinyl-sourcemaps-apply');
 var saveLicense = require('uglify-save-license');
 var isObject = require('isobject');
+var createError = require('./lib/createError');
+
 var reSourceMapComment = /\n\/\/# sourceMappingURL=.+?$/;
-var pluginName = 'gulp-uglify';
 
 function trycatch(fn, handle) {
   try {
@@ -42,25 +43,7 @@ function setup(opts) {
   return options;
 }
 
-function createError(file, err) {
-  if (typeof err === 'string') {
-    return new PluginError(pluginName, file.path + ': ' + err, {
-      fileName: file.path,
-      showStack: false
-    });
-  }
-
-  var msg = err.message || err.msg || /* istanbul ignore next */ 'unspecified error';
-
-  return new PluginError(pluginName, file.path + ': ' + msg, {
-    fileName: file.path,
-    lineNumber: err.line,
-    stack: err.stack,
-    showStack: false
-  });
-}
-
-module.exports = function(opts, uglify) {
+module.exports = function (opts, uglify) {
   function minify(file, encoding, callback) {
     var options = setup(opts || {});
 
@@ -76,7 +59,9 @@ module.exports = function(opts, uglify) {
       options.outSourceMap = file.relative;
     }
 
-    var mangled = trycatch(function() {
+    var originalContents = String(file.contents);
+
+    var mangled = trycatch(function () {
       var m = uglify.minify(String(file.contents), options);
       m.code = new Buffer(m.code.replace(reSourceMapComment, ''));
       return m;
@@ -91,6 +76,7 @@ module.exports = function(opts, uglify) {
     if (file.sourceMap) {
       var sourceMap = JSON.parse(mangled.map);
       sourceMap.sources = [file.relative];
+      sourceMap.sourcesContent = [originalContents];
       applySourceMap(file, sourceMap);
     }
 
