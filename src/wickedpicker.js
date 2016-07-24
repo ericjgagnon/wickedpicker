@@ -43,7 +43,9 @@
             title: 'Timepicker',
             showSeconds: false,
             secondsInterval: 1,
-            minutesInterval: 1
+            minutesInterval: 1,
+            beforeShow: null,
+            show: null
         };
 
     /*
@@ -88,7 +90,13 @@
          * @param {object} The input being clicked
          */
         showPicker: function (element) {
+            //If there is a beforeShow function, then call it with the input calling the timepicker and the
+            // timepicker itself
+            if (typeof this.options.beforeShow === 'function') {
+                this.options.beforeShow(element, this.timepicker);
+            }
             var timepickerPos = $(element).offset();
+
             $(element).attr({'aria-showingpicker': 'true', 'tabindex': -1});
             this.setText(element);
             this.showHideMeridiemControl();
@@ -109,8 +117,13 @@
                 'z-index': this.element.css('z-index') + 1,
                 position: 'absolute',
                 left: timepickerPos.left,
-                top: timepickerPos.top + element[0].offsetHeight
+                top: timepickerPos.top + $(element)[0].offsetHeight
             }).show();
+            //If there is a show function, then call it with the input calling the timepicker and the
+            // timepicker itself
+            if (typeof this.options.show === 'function') {
+                this.options.show(element, this.timepicker);
+            }
 
             this.handleTimeAdjustments(element);
         },
@@ -122,6 +135,7 @@
          */
         hideTimepicker: function (element) {
             this.timepicker.hide();
+            console.log(element);
             var pickerHidden = {
                 start: function () {
                     var setShowPickerFalse = $.Deferred();
@@ -159,10 +173,10 @@
          */
         showHideMeridiemControl: function () {
             if (this.options.twentyFour === false) {
-                $('.wickedpicker__controls__control--meridiem').parent().show();
+                $(this.meridiemElem).parent().show();
             }
             else {
-                $('.wickedpicker__controls__control--meridiem').parent().hide();
+                $(this.meridiemElem).parent().hide();
             }
         },
 
@@ -171,10 +185,10 @@
          */
         showHideSecondsControl: function () {
             if (this.options.showSeconds) {
-                $('.wickedpicker__controls__control--seconds').parent().show();
+                $(this.secondsElem).parent().show();
             }
             else {
-                $('.wickedpicker__controls__control--seconds').parent().hide();
+                $(this.secondsElem).parent().hide();
             }
         },
 
@@ -187,29 +201,32 @@
             var self = this;
             $(element).attr('tabindex', 0);
             $(element).on('click focus', function (event) {
-                self.showPicker($(this));
+                //Prevent multiple firings
+                if ($(self.timepicker).is(':hidden')) {
+                    self.showPicker($(this));
+                    $(self.hoursElem).focus();
+                }
             });
             
             //Handle click events for closing Wickedpicker
             var clickHandler = function (event) {
-                //Clicking the X
-                if ($(event.target).is(self.close)) {
-                    self.hideTimepicker(element);
-                } else if ($(event.target).closest(self.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the  Wickedpicker or one of it's inputs
-                    event.stopPropagation();
-                } else {   //Everything else
-                    self.hideTimepicker(element);
+                //Only fire the hide event when you have to
+                if ($(self.timepicker).is(':visible')) {
+                    //Clicking the X
+                    if ($(event.target).is(self.close)) {
+                        self.hideTimepicker(element);
+                    } else if ($(event.target).closest(self.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the Wickedpicker or one of it's inputs
+                        event.stopPropagation();
+                    } else {   //Everything else
+                        self.hideTimepicker(element);
+                    }
                 }
             };
             $(document).off('click', clickHandler).on('click', clickHandler);
-            
-            $(element).on('focus', function () {
-                $('.wickedpicker__controls__control--hours').focus();
-            });
         },
 
         /**
-         * Added keyboard functionality to improve usability
+         * Added keyboard functionality to improve usabil
          */
         attachKeyboardEvents: function () {
             $(document).on('keydown', $.proxy(function (event) {
@@ -461,7 +478,7 @@
          * @param {object} The input element
          */
         setText: function (input) {
-            $(input).val(this.formatTime(this.selectedHour, this.selectedMin, this.selectedMeridiem, this.selectedSec));
+            $(input).val(this.formatTime(this.selectedHour, this.selectedMin, this.selectedMeridiem, this.selectedSec)).change();
         },
 
         /*
