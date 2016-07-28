@@ -33,7 +33,7 @@
     var today = new Date();
 
     var pluginName = "wickedpicker",git
-        defaults = {
+    var defaults = {
             now: today.getHours() + ':' + today.getMinutes(),
             twentyFour: false,
             upArrow: 'wickedpicker__controls__control-up',
