@@ -136,7 +136,6 @@
          */
         hideTimepicker: function (element) {
             this.timepicker.hide();
-            console.log(element);
             var pickerHidden = {
                 start: function () {
                     var setShowPickerFalse = $.Deferred();
