@@ -32,8 +32,8 @@
 
     var today = new Date();
 
-    var pluginName = "wickedpicker",git
-    var defaults = {
+    var pluginName = "wickedpicker",
+        defaults = {
             now: today.getHours() + ':' + today.getMinutes(),
             twentyFour: false,
             upArrow: 'wickedpicker__controls__control-up',
@@ -136,7 +136,6 @@
          */
         hideTimepicker: function (element) {
             this.timepicker.hide();
-            console.log(element);
             var pickerHidden = {
                 start: function () {
                     var setShowPickerFalse = $.Deferred();
