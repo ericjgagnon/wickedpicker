@@ -6,6 +6,11 @@
 
 * [jQuery](http://jquery.com/download/) (>= 1.9)
 
+## Installation
+```shell
+    $ bower install wickedpicker
+```
+
 ## Usage
 
 #### In your HTML
