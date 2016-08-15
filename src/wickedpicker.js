@@ -422,7 +422,7 @@
          * @return {string}
          */
         parseMeridiem: function (hours) {
-            return (hours > 12) ? 'PM' : 'AM';
+            return (hours > 11) ? 'PM' : 'AM';
         },
 
         /*
