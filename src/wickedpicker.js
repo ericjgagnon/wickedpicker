@@ -1,5 +1,5 @@
 /**
- * wickedpicker v0.4.0 - A simple jQuery timepicker.
+ * wickedpicker v0.4.1 - A simple jQuery timepicker.
  * Copyright (c) 2015-2016 Eric Gagnon - http://github.com/wickedRidge/wickedpicker
  * License: MIT
  */

@@ -1,6 +1,6 @@
 {
   "name": "wickedpicker",
-  "version": "0.1.0",
+  "version": "0.4.1",
   "description": "A simple jQuery timepicker plugin.",
   "main": "gulpfile.js",
   "dependencies": {
