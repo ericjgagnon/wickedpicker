@@ -43,6 +43,7 @@
         secondsInterval: 1, //Change interval for seconds, defaults to 1,
         minutesInterval: 1, //Change interval for minutes, defaults to 1
         beforeShow: null, //A function to be called before the Wickedpicker is shown
+        onClose: null, //A function to be called after the Wickedpicker is closed/hidden
         show: null, //A function to be called when the Wickedpicker is shown
         clearable: false, //Make the picker's input clearable (has clickable "x")
     };
