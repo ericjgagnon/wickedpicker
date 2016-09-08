@@ -39,6 +39,7 @@
             upArrow: 'wickedpicker__controls__control-up',
             downArrow: 'wickedpicker__controls__control-down',
             close: 'wickedpicker__close',
+            onClose: null,
             hoverState: 'hover-state',
             title: 'Timepicker',
             showSeconds: false,
@@ -133,9 +134,14 @@
          * Hides the timepicker that is currently shown if it is not part of the timepicker
          *
          * @param {Object} The DOM object being clicked on the page
+         * BeinnLora: trigger function to call on closing timepicker. 
+         * A better option name might be afterShow to be synonymous with beforeShow function.
          */
         hideTimepicker: function (element) {
             this.timepicker.hide();
+            if (typeof this.options.onClose === 'function') {
+                this.options.onClose(element, this.timepicker);
+            }
             var pickerHidden = {
                 start: function () {
                     var setShowPickerFalse = $.Deferred();
