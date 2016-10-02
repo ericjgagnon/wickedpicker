@@ -439,6 +439,7 @@
                 'Wickedpicker': this,
                 'input': element
             }, function (event) {
+                if(event.which!=1) return false;
                 var operator = (this.className.indexOf('up') > -1) ? '+' : '-';
                 var passedData = event.data;
                 if (event.type == 'mousedown') {
