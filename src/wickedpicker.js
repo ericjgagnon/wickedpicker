@@ -45,6 +45,7 @@
             secondsInterval: 1,
             minutesInterval: 1,
             beforeShow: null,
+            afterShow: null,
             show: null,
             clearable: false
         };
@@ -133,9 +134,14 @@
          * Hides the timepicker that is currently shown if it is not part of the timepicker
          *
          * @param {Object} The DOM object being clicked on the page
+         * 
+         * BeinnLora: added trigger function to call on closing/hiding timepicker. 
          */
         hideTimepicker: function (element) {
             this.timepicker.hide();
+            if (typeof this.options.afterShow === 'function') {
+                this.options.afterShow(element, this.timepicker);
+            }
             var pickerHidden = {
                 start: function () {
                     var setShowPickerFalse = $.Deferred();
