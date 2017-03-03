@@ -63,14 +63,14 @@
         this.element.attr('aria-showingpicker', 'false');
         this.createPicker();
         this.timepicker = $('.wickedpicker');
-        this.up = $('.' + this.options.upArrow);
-        this.down = $('.' + this.options.downArrow);
+        this.up = $('.' + this.options.upArrow.split(/\s+/).join('.'));
+        this.down = $('.' + this.options.downArrow.split(/\s+/).join('.'));
         this.separator = $('.wickedpicker__controls__control--separator');
         this.hoursElem = $('.wickedpicker__controls__control--hours');
         this.minutesElem = $('.wickedpicker__controls__control--minutes');
         this.secondsElem = $('.wickedpicker__controls__control--seconds');
         this.meridiemElem = $('.wickedpicker__controls__control--meridiem');
-        this.close = $('.' + this.options.close);
+        this.close = $('.' + this.options.close.split(/\s+/).join('.'));
 
         //Create a new Date object based on the default or passing in now value
         var time = this.timeArrayFromString(this.options.now);
@@ -445,6 +445,7 @@
                 'Wickedpicker': this,
                 'input': element
             }, function (event) {
+                if(event.which!=1) return false;
                 var operator = (this.className.indexOf('up') > -1) ? '+' : '-';
                 var passedData = event.data;
                 if (event.type == 'mousedown') {
