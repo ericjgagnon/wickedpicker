@@ -109,7 +109,6 @@
                 var text = this.getText(element);
                 var meridiem = /\s\w\w$/.test(text) ? text.substr(-2, 2) : null;
                 var inputTime = text.replace(/\s\w\w$/, '').split(this.options.timeSeparator);
-                console.log(inputTime);
                 var newTime = {};
                 newTime.hours = inputTime[0];
                 newTime.minutes = inputTime[1];
