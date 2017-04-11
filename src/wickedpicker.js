@@ -42,6 +42,7 @@
             hoverState: 'hover-state',
             title: 'Timepicker',
             showSeconds: false,
+            timeSeparator: ' : ',
             secondsInterval: 1,
             minutesInterval: 1,
             beforeShow: null,
@@ -103,15 +104,20 @@
             this.setText(element);
             this.showHideMeridiemControl();
             if (this.getText(element) !== this.getTime()) {
-                var inputTime = this.getText(element).replace(/:/g, '').split(' ');
+
+                // Check meridiem 
+                var text = this.getText(element);
+                var meridiem = /\s\w\w$/.test(text) ? text.substr(-2, 2) : null;
+                var inputTime = text.replace(/\s\w\w$/, '').split(this.options.timeSeparator);
+                console.log(inputTime);
                 var newTime = {};
                 newTime.hours = inputTime[0];
-                newTime.minutes = inputTime[2];
+                newTime.minutes = inputTime[1];
                 if (this.options.showSeconds) {
-                    newTime.seconds = inputTime[4];
-                    newTime.meridiem = inputTime[5];
+                    newTime.seconds = inputTime[2];
+                    newTime.meridiem = meridiem;
                 } else {
-                    newTime.meridiem = inputTime[3];
+                    newTime.meridiem = meridiem;
                 }
                 this.setTime(newTime);
             }
@@ -514,12 +520,12 @@
          * @return {string}
          */
         formatTime: function (hour, min, meridiem, seconds) {
-            var formattedTime = hour + ' : ' + min;
+            var formattedTime = hour + this.options.timeSeparator + min;
             if (this.options.twentyFour) {
-                formattedTime = hour + ' : ' + min;
+                formattedTime = hour + this.options.timeSeparator  + min;
             }
             if (this.options.showSeconds) {
-                formattedTime += ' : ' + seconds;
+                formattedTime += this.options.timeSeparator  + seconds;
             }
             if (this.options.twentyFour === false) {
                 formattedTime += ' ' + meridiem;
@@ -580,6 +586,9 @@
         _time: function () {
             var inputValue = $(this.element).val();
             return (inputValue === '') ? this.formatTime(this.selectedHour, this.selectedMin, this.selectedMeridiem, this.selectedSec) : inputValue;
+        },
+        _hide: function() {
+            this.hideTimepicker(this.element);
         }
     });
 

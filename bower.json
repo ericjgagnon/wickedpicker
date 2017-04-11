@@ -4,12 +4,11 @@
   "description": "A simple jQuery timepicker plugin.",
   "main": [
     "./dist/wickedpicker.min.js",
-    "./dist/wickedpicker.min.css",
-    "./src/wickedpicker.js",
-    "./stylesheets/wickedpicker.css"
+    "./dist/wickedpicker.min.css"
   ],
   "authors": [
-    "Eric Gagnon"
+    "Eric Gagnon",
+    "Ruben Seyferth"
   ],
   "moduleType": "globals",
   "license": "MIT",
