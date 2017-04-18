@@ -214,23 +214,25 @@
             $(element).on('click focus', function (event) {
                 //Prevent multiple firings
                 if ($(self.timepicker).is(':hidden')) {
-                    self.showPicker($(this));
-                    $(self.hoursElem).focus();
+                  self.showPicker($(this));
+                  window.lasTimePickerControl = $(this); //Put the reference on this timepicker into global scope for unsing that in afterShow function
+                  $(self.hoursElem).focus();
                 }
             });
-            
+
             //Handle click events for closing Wickedpicker
             var clickHandler = function (event) {
                 //Only fire the hide event when you have to
                 if ($(self.timepicker).is(':visible')) {
                     //Clicking the X
                     if ($(event.target).is(self.close)) {
-                        self.hideTimepicker(element);
+                      self.hideTimepicker(window.lasTimePickerControl);
                     } else if ($(event.target).closest(self.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the Wickedpicker or one of it's inputs
                         event.stopPropagation();
                     } else {   //Everything else
-                        self.hideTimepicker(element);
+                      self.hideTimepicker(window.lasTimePickerControl);
                     }
+                    window.lasTimePickerControl = null;
                 }
             };
             $(document).off('click', clickHandler).on('click', clickHandler);
