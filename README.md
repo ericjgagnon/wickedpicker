@@ -40,6 +40,7 @@
         hoverState: 'hover-state', //The hover state class to use, for custom CSS
         title: 'Timepicker', //The Wickedpicker's title,
         showSeconds: false, //Whether or not to show seconds,
+        timeSeparator: ' : ', // The string to put in between hours and minutes (and seconds)
         secondsInterval: 1, //Change interval for seconds, defaults to 1,
         minutesInterval: 1, //Change interval for minutes, defaults to 1
         beforeShow: null, //A function to be called before the Wickedpicker is shown
