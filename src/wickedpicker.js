@@ -48,7 +48,9 @@
             beforeShow: null,
             afterShow: null,
             show: null,
-            clearable: false
+            clearable: false,
+            closeOnClickOutside: true,
+            onClickOutside: function() {},
         };
 
     /*
@@ -220,24 +222,35 @@
                 //Prevent multiple firings
                 if ($(self.timepicker).is(':hidden')) {
                   self.showPicker($(this));
-                  window.lasTimePickerControl = $(this); //Put the reference on this timepicker into global scope for unsing that in afterShow function
+                  window.lastTimePickerControl = $(this); //Put the reference on this timepicker into global scope for unsing that in afterShow function
                   $(self.hoursElem).focus();
                 }
             });
 
+
             //Handle click events for closing Wickedpicker
-            var clickHandler = function (event) {
+            var clickHandler = function (event) { //TODO: Fix double firing
                 //Only fire the hide event when you have to
                 if ($(self.timepicker).is(':visible')) {
                     //Clicking the X
                     if ($(event.target).is(self.close)) {
-                      self.hideTimepicker(window.lasTimePickerControl);
+                      self.hideTimepicker(window.lastTimePickerControl);
                     } else if ($(event.target).closest(self.timepicker).length || $(event.target).closest($('.hasWickedpicker')).length) { //Clicking the Wickedpicker or one of it's inputs
-                        event.stopPropagation();
+                      event.stopPropagation();
                     } else {   //Everything else
-                      self.hideTimepicker(window.lasTimePickerControl);
+                      if (typeof self.options.onClickOutside === 'function') {
+                        self.options.onClickOutside();
+                      }
+                      else {
+                        console.warn("Type of onClickOutside must be a function");
+                      }
+
+                      if (!self.options.closeOnClickOutside) {
+                        return;
+                      }
+                      self.hideTimepicker(window.lastTimePickerControl);
                     }
-                    window.lasTimePickerControl = null;
+                    window.lastTimePickerControl = null;
                 }
             };
             $(document).off('click', clickHandler).on('click', clickHandler);
