@@ -109,16 +109,15 @@
 
                 // Check meridiem 
                 var text = this.getText(element);
-                var meridiem = /\s\w\w$/.test(text) ? text.substr(-2, 2) : null;
-                var inputTime = text.replace(/\s\w\w$/, '').split(this.options.timeSeparator);
+                var re = /\s[ap]m$/i;
+                var meridiem = re.test(text) ? text.substr(-2, 2) : null;
+                var inputTime = text.replace(re, '').split(this.options.timeSeparator);
                 var newTime = {};
                 newTime.hours = inputTime[0];
                 newTime.minutes = inputTime[1];
+                newTime.meridiem = meridiem;
                 if (this.options.showSeconds) {
                     newTime.seconds = inputTime[2];
-                    newTime.meridiem = meridiem;
-                } else {
-                    newTime.meridiem = meridiem;
                 }
                 this.setTime(newTime);
             }
@@ -535,9 +534,6 @@
          */
         formatTime: function (hour, min, meridiem, seconds) {
             var formattedTime = hour + this.options.timeSeparator + min;
-            if (this.options.twentyFour) {
-                formattedTime = hour + this.options.timeSeparator  + min;
-            }
             if (this.options.showSeconds) {
                 formattedTime += this.options.timeSeparator  + seconds;
             }
